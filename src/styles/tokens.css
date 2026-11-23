@@ -1,0 +1,47 @@
+/*
+ * Raj Avinsys design tokens.
+ *
+ * Source of truth: the live site (https://www.rajgrouponline.com/), extracted from its
+ * compiled stylesheet and the Firecrawl branding read on 23 Nov 2026.
+ *   primary / accent   hsl(196 100% 37%)  = #008ABD (theme-color #0380b1 on the live site)
+ *   accent (light)     #1A97C4
+ *   text               hsl(222.2 84% 4.9%) = #020817
+ *   font               Urbanist (headings and body), Inter (fallback)
+ *
+ * Active theme: Engineered Teal. Brand blue (#008ABD family) is used only for buttons, links and
+ * focus. Everything else is warm charcoal and concrete neutrals.
+ *
+ * Do not add colours here that are not in the live site's palette without a design review.
+ */
+:root {
+  /* Brand */
+  --brand-primary: #008abd;
+  --brand-primary-strong: #007099; /* button fill with white text: 5.6:1 contrast */
+  --brand-primary-deep: #0f3b40; /* Engineered Teal: slate-teal for dark bands, hero and headings */
+  --brand-accent: #7fd3f1; /* text and marks on deep blue (5.7:1). Base brand accent #1A97C4 is too low on dark */
+  --brand-accent-base: #1a97c4; /* decorative use on light surfaces */
+  --brand-accent-soft: #d7ebee; /* cool teal tint */
+
+  /* Surfaces */
+  --surface-page: #ffffff;
+  --surface-muted: #e8eeef; /* cool grey-teal surface */
+  --surface-raised: #ffffff;
+
+  /* Text */
+  --text-strong: #0f2a2e;
+  --text-body: #34484c;
+  --text-muted: #4f6266; /* cool grey, passes AA on the teal-grey surface */
+  --text-on-brand: #ffffff;
+
+  /* Lines and states */
+  --line-default: #cfdadd;
+  --focus-ring: #008abd;
+  --state-danger: hsl(0 84.2% 60.2%);
+
+  /* Shape and type */
+  --radius-ctl: 10px;
+  --radius-card: 2px; /* Square panels and cards. Buttons keep the live brand radius. */
+  --stack-display: Urbanist, Inter, ui-sans-serif, system-ui, sans-serif;
+  --stack-body: Inter, Urbanist, ui-sans-serif, system-ui, sans-serif;
+  --stack-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}

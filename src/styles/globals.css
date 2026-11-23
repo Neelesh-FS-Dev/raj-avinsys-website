@@ -1,0 +1,225 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+/*
+ * Tailwind names point at the centralised tokens in tokens.css, which are taken from
+ * the live Raj Avinsys site. Change colours there, not here.
+ */
+@theme {
+  --color-primary: var(--brand-primary-deep);
+  --color-primary-dark: var(--brand-primary-deep);
+  --color-secondary: var(--text-body);
+  --color-accent: var(--brand-accent);
+  --color-accent-dark: var(--brand-primary-strong);
+  --color-technical: var(--brand-primary-strong);
+  --color-brand: var(--brand-primary);
+  --color-background: var(--surface-page);
+  --color-surface: var(--surface-muted);
+  --color-surface-alt: var(--brand-accent-soft);
+  --color-text-primary: var(--text-strong);
+  --color-text-secondary: var(--text-muted);
+  --color-border: var(--line-default);
+  --color-success: #217346;
+  --color-error: var(--state-danger);
+
+  --font-heading: var(--stack-display);
+  --font-body: var(--stack-body);
+  --font-mono: var(--stack-mono);
+
+  --radius-control: var(--radius-ctl);
+
+  --container-page: 1280px;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--color-background);
+    color: var(--color-text-primary);
+    font-family: var(--stack-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading);
+    color: var(--color-primary);
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+    font-weight: 700;
+  }
+
+  h1 {
+    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+    text-transform: none;
+  }
+
+  h2 {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+  }
+
+  h3 {
+    font-size: 1.375rem;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-technical);
+    outline-offset: 2px;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@layer components {
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -4rem;
+    z-index: 100;
+    background: var(--color-primary);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 2px;
+  }
+
+  .skip-link:focus {
+    top: 1rem;
+  }
+
+  /* Keeps white headline text readable over the hero photograph and video. */
+  /* Flat tint over the photograph. Text sits on it at full contrast on every width. */
+  .hero-scrim {
+    background: rgb(15 59 64 / 0.78);
+  }
+
+  .eyebrow {
+    font-family: var(--stack-mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-technical);
+    font-weight: 600;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.625rem 1.25rem;
+    border-radius: 2px;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    border: 2px solid transparent;
+    transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  /* Brand blue, darkened one step so white button text meets WCAG AA (5.6:1). */
+  .btn-primary {
+    background: var(--brand-primary-strong);
+    color: #fff;
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: var(--brand-primary-deep);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.7);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .btn-outline {
+    background: #fff;
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+
+  .btn-outline:hover {
+    background: var(--color-surface);
+  }
+
+  .field-input {
+    width: 100%;
+    min-height: 2.75rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #8a97a3;
+    border-radius: 2px;
+    background: #fff;
+    font: inherit;
+    color: var(--color-text-primary);
+  }
+
+  .field-input[aria-invalid="true"] {
+    border-color: var(--color-error);
+  }
+
+  .field-input:focus-visible {
+    border-color: var(--color-technical);
+  }
+}
+
+/* Home page: larger display headings and a scroll-linked entrance for each section.
+ * Content is visible by default; the motion only runs where view timelines exist, and reduced motion skips it. */
+.home-page h2 {
+  font-size: clamp(1.75rem, 4vw, 3.5rem);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+}
+
+@supports (animation-timeline: view()) {
+  .home-page .reveal {
+    animation: home-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+}
+
+@keyframes home-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

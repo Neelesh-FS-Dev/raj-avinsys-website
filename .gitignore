@@ -1,0 +1,14 @@
+node_modules
+dist
+*.local
+.env
+.env.*
+!.env.example
+test-results
+playwright-report
+dist-ssr
+rfq-storage
+.vercel
+
+# Local design-inspection output
+.taste-skill/
